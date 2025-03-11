@@ -827,3 +827,914 @@ In today's hyper-digitized world, safeguarding information, systems, and network
     </script>
 </body>
 </html>
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SecureHack - Dashboard</title>
+    <style>
+        :root {
+            --primary-color: #0c0f16;
+            --secondary-color: #1a1f2e;
+            --accent-color: #00ff8c;
+            --text-color: #e0e0e0;
+            --error-color: #ff3e3e;
+            --success-color: #00c853;
+            --card-bg: #1a1f2e;
+            --nav-hover: #282f3e;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Courier New', monospace;
+        }
+        
+        body {
+            background-color: var(--primary-color);
+            color: var(--text-color);
+            min-height: 100vh;
+            background-image: 
+                radial-gradient(rgba(0, 255, 140, 0.03) 2px, transparent 2px),
+                radial-gradient(rgba(0, 255, 140, 0.02) 2px, transparent 2px);
+            background-size: 40px 40px;
+            background-position: 0 0, 20px 20px;
+        }
+        
+        /* Header & Navigation */
+        header {
+            background-color: var(--secondary-color);
+            box-shadow: 0 1px 10px rgba(0, 0, 0, 0.3);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 30px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--accent-color);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo span {
+            color: var(--text-color);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 25px;
+            position: relative;
+        }
+        
+        nav ul li a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-size: 16px;
+            padding: 10px 15px;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+        
+        nav ul li a:hover {
+            background-color: var(--nav-hover);
+        }
+        
+        .active {
+            border-bottom: 2px solid var(--accent-color);
+            color: var(--accent-color);
+        }
+        
+        .user-menu {
+            position: relative;
+        }
+        
+        .user-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background-color: var(--accent-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-color);
+            font-weight: bold;
+            cursor: pointer;
+        }
+        
+        .dropdown-menu {
+            position: absolute;
+            top: 45px;
+            right: 0;
+            background-color: var(--secondary-color);
+            border-radius: 4px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            width: 200px;
+            display: none;
+            z-index: 10;
+        }
+        
+        .dropdown-menu.show {
+            display: block;
+        }
+        
+        .dropdown-menu ul {
+            list-style: none;
+            padding: 5px 0;
+        }
+        
+        .dropdown-menu ul li {
+            margin: 0;
+        }
+        
+        .dropdown-menu ul li a {
+            display: block;
+            padding: 10px 20px;
+            color: var(--text-color);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .dropdown-menu ul li a:hover {
+            background-color: var(--nav-hover);
+        }
+        
+        .dropdown-divider {
+            height: 1px;
+            background-color: #2c3347;
+            margin: 5px 0;
+        }
+        
+        /* Main Content */
+        .container {
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+        
+        .welcome-banner {
+            background-color: var(--secondary-color);
+            border-radius: 10px;
+            padding: 30px;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .welcome-text {
+            flex: 2;
+        }
+        
+        .welcome-text h1 {
+            font-size: 28px;
+            margin-bottom: 10px;
+            color: var(--accent-color);
+        }
+        
+        .welcome-text p {
+            font-size: 16px;
+            margin-bottom: 15px;
+        }
+        
+        .welcome-actions {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+        }
+        
+        .btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 4px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            text-align: center;
+        }
+        
+        .btn-primary {
+            background-color: var(--accent-color);
+            color: #000;
+        }
+        
+        .btn-primary:hover {
+            background-color: rgba(0, 255, 140, 0.8);
+        }
+        
+        .btn-secondary {
+            background-color: transparent;
+            border: 1px solid var(--accent-color);
+            color: var(--accent-color);
+            margin-top: 10px;
+        }
+        
+        .btn-secondary:hover {
+            background-color: rgba(0, 255, 140, 0.1);
+        }
+        
+        .section-header {
+            margin-bottom: 20px;
+            border-bottom: 1px solid #2c3347;
+            padding-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .section-header h2 {
+            font-size: 24px;
+            color: var(--accent-color);
+        }
+        
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+        
+        .video-card {
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease;
+        }
+        
+        .video-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .video-thumbnail {
+            position: relative;
+            height: 180px;
+            overflow: hidden;
+            background-color: #2c3347;
+        }
+        
+        .video-thumbnail img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .video-duration {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: var(--text-color);
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+        }
+        
+        .mentor-badge {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background-color: var(--accent-color);
+            color: #000;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        
+        .video-info {
+            padding: 15px;
+        }
+        
+        .video-title {
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+        
+        .video-meta {
+            display: flex;
+            justify-content: space-between;
+            font-size: 14px;
+            color: #878787;
+            margin-bottom: 10px;
+        }
+        
+        .video-description {
+            font-size: 14px;
+            line-height: 1.5;
+            margin-bottom: 15px;
+            color: #a1a1a1;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        
+        .video-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+        
+        .tag {
+            background-color: #2c3347;
+            color: #878787;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+        }
+        
+        .view-all {
+            color: var(--accent-color);
+            text-decoration: none;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .view-all:hover {
+            text-decoration: underline;
+        }
+        
+        .view-all span {
+            margin-left: 5px;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--secondary-color);
+            padding: 30px 0;
+            margin-top: 50px;
+        }
+        
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+        }
+        
+        .footer-section h3 {
+            color: var(--accent-color);
+            font-size: 18px;
+            margin-bottom: 15px;
+        }
+        
+        .footer-section ul {
+            list-style: none;
+        }
+        
+        .footer-section ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-section ul li a {
+            color: #878787;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-section ul li a:hover {
+            color: var(--text-color);
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #2c3347;
+            color: #878787;
+            font-size: 14px;
+        }
+        
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                padding: 15px;
+            }
+            
+            nav ul {
+                margin-top: 15px;
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+            
+            nav ul li {
+                margin: 5px;
+            }
+            
+            .welcome-banner {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .welcome-actions {
+                margin-top: 20px;
+                align-items: center;
+            }
+            
+            .video-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* Stats Counter */
+        .stats-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+        
+        .stat-card {
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .stat-number {
+            font-size: 36px;
+            font-weight: bold;
+            color: var(--accent-color);
+            margin-bottom: 10px;
+        }
+        
+        .stat-label {
+            font-size: 14px;
+            color: #878787;
+        }
+        
+        /* Modal */
+        .modal-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .modal-bg.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .modal {
+            background-color: var(--secondary-color);
+            border-radius: 8px;
+            width: 90%;
+            max-width: 800px;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.5);
+            position: relative;
+        }
+        
+        .modal-close {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: none;
+            border: none;
+            color: var(--text-color);
+            font-size: 20px;
+            cursor: pointer;
+            z-index: 10;
+        }
+        
+        .modal-video {
+            width: 100%;
+            max-height: 450px;
+            background-color: #000;
+        }
+        
+        .modal-video iframe {
+            width: 100%;
+            height: 450px;
+            border: none;
+        }
+        
+        .modal-content {
+            padding: 20px;
+        }
+        
+        .modal-title {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        
+        .modal-meta {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            color: #878787;
+        }
+        
+        .modal-description {
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+        
+        .creator-info {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .creator-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: var(--accent-color);
+            margin-right: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-color);
+            font-weight: bold;
+            font-size: 20px;
+        }
+        
+        .creator-details h4 {
+            margin-bottom: 5px;
+        }
+        
+        .creator-details p {
+            color: #878787;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <a href="#" class="logo">Secure<span>Hack</span></a>
+            <nav>
+                <ul>
+                    <li><a href="#" class="active">Dashboard</a></li>
+                    <li><a href="#">Labs</a></li>
+                    <li><a href="#">Challenges</a></li>
+                    <li><a href="#">Courses</a></li>
+                    <li><a href="#">Community</a></li>
+                </ul>
+            </nav>
+            <div class="user-menu">
+                <div class="user-avatar" id="user-avatar">A</div>
+                <div class="dropdown-menu" id="dropdown-menu">
+                    <ul>
+                        <li><a href="#">Profile</a></li>
+                        <li><a href="#">My Courses</a></li>
+                        <li><a href="#">Settings</a></li>
+                        <li class="dropdown-divider"></li>
+                        <li><a href="#">Help & Support</a></li>
+                        <li><a href="#">Logout</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <main class="container">
+        <section class="welcome-banner">
+            <div class="welcome-text">
+                <h1>Welcome to SecureHack, Admin!</h1>
+                <p>Your cybersecurity journey begins here. Explore our free resources from top cybersecurity mentors to get started.</p>
+                <p>Complete your profile to unlock personalized learning paths and track your progress.</p>
+            </div>
+            <div class="welcome-actions">
+                <a href="#" class="btn btn-primary">Complete Profile</a>
+                <a href="#" class="btn btn-secondary">Explore Premium</a>
+            </div>
+        </section>
+        
+        <section class="stats-section">
+            <div class="stats-cards">
+                <div class="stat-card">
+                    <div class="stat-number">15</div>
+                    <div class="stat-label">Free Courses</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">42</div>
+                    <div class="stat-label">Practice Labs</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">8</div>
+                    <div class="stat-label">Top Mentors</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">28K+</div>
+                    <div class="stat-label">Community Members</div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="content-section">
+            <div class="section-header">
+                <h2>Top Free Cybersecurity Videos</h2>
+                <a href="#" class="view-all">View All <span>→</span></a>
+            </div>
+            
+            <div class="video-grid">
+                <!-- Video 1 -->
+                <div class="video-card" onclick="openVideoModal('1')">
+                    <div class="video-thumbnail">
+                        <img src="/api/placeholder/320/180" alt="Ethical Hacking Fundamentals">
+                        <div class="video-duration">45:22</div>
+                        <div class="mentor-badge">Top Mentor</div>
+                    </div>
+                    <div class="video-info">
+                        <h3 class="video-title">Ethical Hacking Fundamentals: Getting Started</h3>
+                        <div class="video-meta">
+                            <span>David Mitchell</span>
+                            <span>152K views</span>
+                        </div>
+                        <p class="video-description">Learn the basics of ethical hacking and penetration testing in this comprehensive guide for beginners. No prior experience required.</p>
+                        <div class="video-tags">
+                            <span class="tag">Ethical Hacking</span>
+                            <span class="tag">Beginner</span>
+                            <span class="tag">Pentesting</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Video 2 -->
+                <div class="video-card" onclick="openVideoModal('2')">
+                    <div class="video-thumbnail">
+                        <img src="/api/placeholder/320/180" alt="Web Application Security">
+                        <div class="video-duration">38:15</div>
+                        <div class="mentor-badge">Top Mentor</div>
+                    </div>
+                    <div class="video-info">
+                        <h3 class="video-title">OWASP Top 10: Web Application Security Essentials</h3>
+                        <div class="video-meta">
+                            <span>Sarah Johnson</span>
+                            <span>98K views</span>
+                        </div>
+                        <p class="video-description">Understand the OWASP Top 10 web application vulnerabilities and how to protect against them with practical examples.</p>
+                        <div class="video-tags">
+                            <span class="tag">Web Security</span>
+                            <span class="tag">OWASP</span>
+                            <span class="tag">Intermediate</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Video 3 -->
+                <div class="video-card" onclick="openVideoModal('3')">
+                    <div class="video-thumbnail">
+                        <img src="/api/placeholder/320/180" alt="Network Security">
+                        <div class="video-duration">52:41</div>
+                        <div class="mentor-badge">Top Mentor</div>
+                    </div>
+                    <div class="video-info">
+                        <h3 class="video-title">Network Security: From Theory to Practice</h3>
+                        <div class="video-meta">
+                            <span>Michael Zhang</span>
+                            <span>78K views</span>
+                        </div>
+                        <p class="video-description">A comprehensive guide to securing networks against common attacks and vulnerabilities. Includes practical demonstrations.</p>
+                        <div class="video-tags">
+                            <span class="tag">Network Security</span>
+                            <span class="tag">Firewall</span>
+                            <span class="tag">IDS/IPS</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="content-section">
+            <div class="section-header">
+                <h2>Most Popular Cybersecurity Courses</h2>
+                <a href="#" class="view-all">View All <span>→</span></a>
+            </div>
+            
+            <div class="video-grid">
+                <!-- Course 1 -->
+                <div class="video-card" onclick="openVideoModal('4')">
+                    <div class="video-thumbnail">
+                        <img src="/api/placeholder/320/180" alt="Kali Linux Mastery">
+                        <div class="video-duration">10+ hours</div>
+                        <div class="mentor-badge">Top Mentor</div>
+                    </div>
+                    <div class="video-info">
+                        <h3 class="video-title">Kali Linux Mastery: The Complete Ethical Hacking Course</h3>
+                        <div class="video-meta">
+                            <span>Alex Rodriguez</span>
+                            <span>265K views</span>
+                        </div>
+                        <p class="video-description">Master Kali Linux and learn to use its powerful toolkit for ethical hacking and penetration testing. Hands-on exercises included.</p>
+                        <div class="video-tags">
+                            <span class="tag">Kali Linux</span>
+                            <span class="tag">Ethical Hacking</span>
+                            <span class="tag">Full Course</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Course 2 -->
+                <div class="video-card" onclick="openVideoModal('5')">
+                    <div class="video-thumbnail">
+                        <img src="/api/placeholder/320/180" alt="Cryptography">
+                        <div class="video-duration">8+ hours</div>
+                        <div class="mentor-badge">Top Mentor</div>
+                    </div>
+                    <div class="video-info">
+                        <h3 class="video-title">Cryptography and Secure Communications</h3>
+                        <div class="video-meta">
+                            <span>Emma Wilson</span>
+                            <span>124K views</span>
+                        </div>
+                        <p class="video-description">Understand the principles of modern cryptography, encryption algorithms, and secure communications protocols with practical examples.</p>
+                        <div class="video-tags">
+                            <span class="tag">Cryptography</span>
+                            <span class="tag">Encryption</span>
+                            <span class="tag">PKI</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Course 3 -->
+                <div class="video-card" onclick="openVideoModal('6')">
+                    <div class="video-thumbnail">
+                        <img src="/api/placeholder/320/180" alt="Malware Analysis">
+                        <div class="video-duration">12+ hours</div>
+                        <div class="mentor-badge">Top Mentor</div>
+                    </div>
+                    <div class="video-info">
+                        <h3 class="video-title">Malware Analysis Fundamentals</h3>
+                        <div class="video-meta">
+                            <span>Robert Chen</span>
+                            <span>96K views</span>
+                        </div>
+                        <p class="video-description">Learn techniques for analyzing malicious software, understanding its behavior, and developing effective countermeasures.</p>
+                        <div class="video-tags">
+                            <span class="tag">Malware</span>
+                            <span class="tag">Reverse Engineering</span>
+                            <span class="tag">Advanced</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <!-- Video Modal -->
+    <div class="modal-bg" id="video-modal">
+        <div class="modal">
+            <button class="modal-close" id="modal-close">×</button>
+            <div class="modal-video">
+                <iframe id="youtube-embed" src="" frameborder="0" allowfullscreen></iframe>
+            </div>
+            <div class="modal-content">
+                <h2 class="modal-title" id="modal-title">Video Title</h2>
+                <div class="modal-meta">
+                    <span id="modal-date">March 10, 2025</span>
+                    <span id="modal-views">0 views</span>
+                </div>
+                <div class="creator-info">
+                    <div class="creator-avatar" id="creator-initial">D</div>
+                    <div class="creator-details">
+                        <h4 id="creator-name">Creator Name</h4>
+                        <p>Cybersecurity Expert</p>
+                    </div>
+                </div>
+                <div class="modal-description" id="modal-description">
+                    Video description goes here.
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>SecureHack</h3>
+                <ul>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Our Team</a></li>
+                    <li><a href="#">Careers</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Resources</h3>
+                <ul>
+                    <li><a href="#">Blog</a></li>
+                    <li><a href="#">Documentation</a></li>
+                    <li><a href="#">Community Forum</a></li>
+                    <li><a href="#">FAQ</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Legal</h3>
+                <ul>
+                    <li><a href="#">Terms of Service</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Cookie Policy</a></li>
+                    <li><a href="#">Ethical Guidelines</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Connect</h3>
+                <ul>
+                    <li><a href="#">Twitter</a></li>
+                    <li><a href="#">LinkedIn</a></li>
+                    <li><a href="#">Discord</a></li>
+                    <li><a href="#">YouTube</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 SecureHack. All rights reserved.</p>
+        </div>
+    </footer>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // User dropdown menu
+            const userAvatar = document.getElementById('user-avatar');
+            const dropdownMenu = document.getElementById('dropdown-menu');
+            
+            userAvatar.addEventListener('click', function() {
+                dropdownMenu.classList.toggle('show');
+            });
+            
+            // Close dropdown when clicking outside
+            document.addEventListener('click', function(event) {
+                if (!userAvatar.contains(event.target) && !dropdownMenu.contains(event.target)) {
+                    dropdownMenu.classList.remove('show');
+                }
+            });
+            
+            // Video Modal
+            const modalBg = document.getElementById('video-modal');
+            const modalClose = document.getElementById('modal-close');
+            const youtubeEmbed = document.getElementById('youtube-embed');
+            
+            modalClose.addEventListener('click', function() {
+                modalBg.classList.remove('active');
+                youtubeEmbed.src = '';
+            });
+            
+            // Close modal when clicking on background
+            modalBg.addEventListener('click', function(event) {
+                if (event.target === modalBg) {
+                    modalBg.classList.remove('active');
+                    youtubeEmbed.src = '';
+                }
+            });
+        });
+        
+        // Function to open video modal
+        function openVideoModal(videoId) {
+            const modalBg = document.getElementById('video-modal');
+            const youtubeEmbed = document.getElementById('youtube-embed');
+            const modalTitle = document.getElementById('modal-title');
+            const modalViews = document.getElementById('modal-views');
+            const modalDescription = document.getElementById('modal-description');
+            const creatorName = document.getElementById('creator-name');
+            const creatorInitial = document.getElementById('creator-initial');
+            
+            // Video data - in a real app, this would come from an API
+            const videoData = {
+                '1': {
